@@ -11,22 +11,25 @@ class Film{
     private $resume;
     private $note;
     private $imgPath;
-    private $acteurs;
-    private $genre;
+    private $cast;
+    private $genres = []; // tableau car plusieurs genres possibles
+    private $_castings = [];
 
-    public function __construct($id, $titre, $anneeSortie, $duree, $realisateur, $resume, $note, $imgPath, Acteur $acteurs, Genre $genre){
+    public function __construct($id, $titre, $anneeSortie, $duree, $realisateur, $resume, $note, $imgPath, Casting $cast, Genre ...$genres){
 
         $this->id = $id;
         $this->titre = $titre;
-        $this->anneeSortie = $anneeSortie;
+        $this->anneeSortie = new Datetime ($anneeSortie);
         $this->duree = $duree;
         $this->realisateur = $realisateur;
         $this->resume = $resume;
         $this->note = $note;
         $this->imgPath = $imgPath;
-        $this->acteurs = $acteurs;
-        $this->genre = $genre;
+        $this->cast = $cast;
+        $this->genres = $genres;
     }
+
+    // Méthode addCasting() qui va permettre de récupérer le casting et un tableau contenant l'acteur et le rôle
 
     /**
      * Get the value of id
@@ -73,7 +76,7 @@ class Film{
      */ 
     public function getAnneeSortie()
     {
-        return $this->anneeSortie;
+        return $this->anneeSortie->format('d/m/Y');
     }
 
     /**
@@ -93,7 +96,7 @@ class Film{
      */ 
     public function getDuree()
     {
-        return $this->duree;
+        return floor($this->duree/60).'h'.$this->duree%60;
     }
 
     /**
@@ -189,46 +192,50 @@ class Film{
     }
 
     /**
-     * Get the value of acteurs
+     * Get the value of cast
      */ 
-    public function getActeurs()
+    public function getCast()
     {
-        return $this->acteurs;
+        return $this->cast;
     }
 
     /**
-     * Set the value of acteurs
+     * Set the value of cast
      *
      * @return  self
      */ 
-    public function setActeurs($acteurs)
+    public function setCast($cast)
     {
-        $this->acteurs = $acteurs;
+        $this->cast = $cast;
 
         return $this;
     }
 
     /**
-     * Get the value of genre
+     * Get the value of genres
      */ 
-    public function getGenre()
+    public function getGenres()
     {
-        return $this->genre;
+        return $this->genres;
     }
 
     /**
-     * Set the value of genre
+     * Set the value of genres
      *
      * @return  self
      */ 
-    public function setGenre($genre)
+    public function setGenres($genres)
     {
-        $this->genre = $genre;
+        $this->genres = $genres;
 
         return $this;
     }
     
     public function __toString(){
-        return $this->id."<br/> Titre : ".$this->titre."<br/> Année : ".$this->anneeSortie."<br/> Durée : ".$this->duree. "<br/> Rélisateur : ".$this->realisateur."<br/> Résumé : ".$this->resume."<br/> Note : ".$this->note. "<br/> Acteur : " .$this->getActeurs()->getNom(). "<br/> Genre :" .$this->getGenre()->getType();
+        $str = $this->id."<br/> Titre : ".$this->titre."<br/> Année : ".$this->getAnneeSortie."<br/> Durée : ".$this->getDuree. "<br/> Rélisateur : ".$this->realisateur."<br/> Résumé : ".$this->resume."<br/> Note : ".$this->note. "<br/> Acteur : " .$this->getCast()->getActeurs(). "<br/> Genres :";
+        foreach ($this->genres as $genre){
+            $str .= $genre->getType(). ", ";
+        }
+        return $str;
     }
 }
