@@ -21,6 +21,17 @@ class Acteur extends Individu{
         return $str;
     }
 
+    public function getFilmographie(){
+        $str = "L'acteur ". $this->prenom .' '. $this->nom. ' a joué dans : ';
+        $str .= '<ul>';
+        foreach($this->castings as $casting){
+            $str .= '<li>'. $casting[1]->getTitre(). ' - '.$casting[0]->getPersonnage().'</li>';    
+        }
+        $str .=  '</ul>';
+        return $str;
+    }
+
+
     public function getNom(){
         return $this->prenom . ' ' . $this->nom;
     }
