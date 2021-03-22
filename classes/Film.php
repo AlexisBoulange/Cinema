@@ -11,11 +11,10 @@ class Film{
     private $resume;
     private $note;
     private $imgPath;
-    private $cast;
     private $genres = []; // tableau car plusieurs genres possibles
-    private $_castings = [];
+    private $cast = [];
 
-    public function __construct($id, $titre, $anneeSortie, $duree, $realisateur, $resume, $note, $imgPath, Casting $cast, Genre ...$genres){
+    public function __construct($id, $titre, $anneeSortie, $duree, Realisateur $realisateur, $resume, $note, $imgPath, Casting $cast, Genre ...$genres){
 
         $this->id = $id;
         $this->titre = $titre;
@@ -27,6 +26,10 @@ class Film{
         $this->imgPath = $imgPath;
         $this->cast = $cast;
         $this->genres = $genres;
+        $this->realisateur->ajouterFilm($this);
+        foreach($this->genres as $genre){
+
+        }
     }
 
     // Méthode addCasting() qui va permettre de récupérer le casting et un tableau contenant l'acteur et le rôle
@@ -236,6 +239,11 @@ class Film{
         foreach ($this->genres as $genre){
             $str .= $genre->getType(). ", ";
         }
+            $str .= '<br><ul>';
+        foreach ($this->castings as $casting){
+            $str .= '<li>' .$casting[0]->getNom(). ' - ' . $casting[1]->getPersonnage().'</li>';
+        }
+        $str .= '</ul>';
         return $str;
     }
 }
