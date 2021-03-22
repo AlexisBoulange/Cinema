@@ -4,7 +4,6 @@ class Role{
 
     private $id;
     private $personnage;
-    private $films = []; 
     private $castings = [];
 
     public function __construct($id, $personnage){
@@ -12,6 +11,16 @@ class Role{
         $this->id = $id;
         $this->personnage = $personnage;
         
+    }
+
+    public function afficherRole(){
+            $str = "Le rôle ". $this->personnage .' a été interpreté par : ';
+            $str .= '<ul>';
+            foreach($this->castings as $casting){
+                $str .= '<li>'. $casting[1]->getTitre().' - Acteur :'. $casting[0]->getNom(). '</li>';    
+            }
+            $str .=  '</ul>';
+            return $str;
     }
 
     /**
