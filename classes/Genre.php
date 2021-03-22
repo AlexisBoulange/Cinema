@@ -12,6 +12,17 @@ class Genre{
     }
     
 
+    public function getLibelle(){
+        $str = "Le réalisateur ". $this->prenom .' '. $this->nom. ' a réalisé les films suivants : ';
+        $str .= '<ul>';
+        foreach($this->films as $film){
+            $str .= '<li>'. $film[1]->getTitre().'</li>';    
+        }
+        $str .=  '</ul>';
+        return $str;
+    }
+
+
     /**
      * Get the value of id
      */ 
