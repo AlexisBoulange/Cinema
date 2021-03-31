@@ -1,71 +1,43 @@
 <?php
 
-class Genre{
-
+class Genre
+{
     private $id;
-    private $type;
+    private $libelle;
+    private $films = [];
 
-    public function __construct($id, $type){
-
+    public function __construct($id, $libelle)
+    {
         $this->id = $id;
-        $this->type = $type;
+        $this->libelle = $libelle;
     }
-    
 
-    public function getLibelle(){
-        $str = "Le réalisateur ". $this->prenom .' '. $this->nom. ' a réalisé les films suivants : ';
+    public function __toString()
+    {
+        return $this->libelle;
+    }
+
+    public function ajouterFilm(Film $film)
+    {
+        array_push($this->films, $film);
+    }
+
+    public function getFilms()
+    {
+        $str = "Liste de films de genre " . $this->libelle . ": ";
         $str .= '<ul>';
-        foreach($this->films as $film){
-            $str .= '<li>'. $film[1]->getTitre().'</li>';    
+        foreach ($this->films as $film) {
+            $str .= '<li>' . $film->getTitre() . '</li>';
         }
-        $str .=  '</ul>';
+        $str .= '</ul>';
         return $str;
     }
 
-
     /**
-     * Get the value of id
-     */ 
-    public function getId()
+     * Get the value of libelle
+     */
+    public function getLibelle()
     {
-        return $this->id;
+        return $this->libelle;
     }
-
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of type
-     */ 
-    public function gettype()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the value of type
-     *
-     * @return  self
-     */ 
-    public function settype($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    function __toString(){
-        return $this->id." ".$this->type;
-    }
-
 }
-?>
