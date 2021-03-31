@@ -1,20 +1,69 @@
 <?php
 
-require_once 'classes/Individu.php';
-require_once 'classes/Acteur.php';
-require_once 'classes/Realisateur.php';
-require_once 'classes/Film.php';
-require_once 'classes/Genre.php';
-require_once 'classes/Casting.php';
-require_once 'classes/Role.php';
-
-$a1 = new Acteur(1, "Viggo", "Mortensen", "Masculin", "20-10-1958", "Aragorn");
-
-// $hf = new Genre(1, "Heroic Fantasy");
+require_once "controllers/FilmController.php";
+require_once "controllers/AccueilController.php";
+require_once "controllers/RealController.php";
+require_once "controllers/ActeurController.php";
+require_once "controllers/GenreController.php";
 
 
-// $lotr = new Film(1, "Le Seigneur des Anneaux", "19-12-2001", 178, "Peter Jackson", "Un jeune et timide `Hobbit`, Frodon Sacquet, hérite d`un anneau magique. Bien loin d`être une simple babiole, il s`agit d`un instrument de pouvoir absolu qui permettrait à Sauron, le `Seigneur des ténèbres`, de régner sur la `Terre du Milieu` et de réduire en esclavage ses peuples. Frodon doit parvenir jusqu`à la `Crevasse du Destin` pour détruire l`anneau.", 5, "img/lotr.jpg", $c1, $hf);
+$ctrlAccueil = new AccueilController;
+$ctrlFilm = new FilmController;
+$ctrlReal = new RealController;
+$ctrlActeur = new ActeurController;
+$ctrlGenre = new GenreController;
 
-// Attribution d'acteurs à un film => casting
+if (isset($_GET['action'])){
 
-echo $c1;
+    $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
+
+    switch ($_GET['action']) {
+        case "listFilms":
+            $ctrlFilm->findAll();
+            break;
+        case "accueil":
+            $ctrlAccueil->pageAccueil();
+            break;
+        case  "listReal":
+            $ctrlReal->findReals();
+            break;
+        case "detailReal":
+            $ctrlReal->findOneById($id);
+            break;
+        case "listActeurs":
+            $ctrlActeur->findActors();
+            break; 
+        case "detailActeur":
+            $ctrlActeur->findDetailActor($id);
+            break; 
+        case "detailFilm":
+            $ctrlFilm->findDetailFilm($id);
+            break;
+        case "ajouterRealForm" : 
+            $ctrlReal->addRealForm();
+            break;
+        case "ajouterRealisateur" : 
+            $ctrlReal->addReal($_POST); 
+            break;
+        case "ajouterActeurForm" : 
+            $ctrlActeur->addActorForm();
+            break;
+        case "ajouterActeur" : 
+            $ctrlActeur->addActor($_POST); 
+            break;
+        case "listGenres" : 
+            $ctrlGenre->findGenres(); 
+            break;
+        case "detailGenre" : 
+            $ctrlGenre->findGenreFilm($id); 
+            break;
+        case "ajouterGenreForm" : 
+            $ctrlGenre->addGenreForm(); 
+            break;
+        case "ajouterGenre" : 
+            $ctrlGenre->addGenre($_POST); 
+            break;
+    }
+}else {
+    $ctrlAccueil->pageAccueil();
+}
