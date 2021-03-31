@@ -1,38 +1,39 @@
 <?php
 
-class Acteur extends Individu{
+class Acteur extends Individu
+{
+    private $castings = [];
 
-    private $casting =[];
-    
+    // Aucune propriété supplémentaire à gérer -> le constructeur parent va suffire
+
     public function __toString()
     {
-        return 'Acteur : '. parent::__toString();
+        return 'Acteur: ' . parent::__toString();
     }
 
-    public function ajouterCasting(Role $role, Film $film){
+    //METHODES
+    public function ajouterCasting(Role $role, Film $film)
+    {
         array_push($this->castings, [$role, $film]);
     }
 
-    public function afficherRoles(){
-        $str = $this->prenom . ' ' . $this-> nom . ' a joué dans : <br>';
-        foreach ($this->castings as $casting){
-            $str .= $casting[0]->getPersonnage() . ' - film : ' . $casting[1]->getTitre(). '<br>';
-        }
-        return $str;
-    }
-
-    public function getFilmographie(){
-        $str = "L'acteur ". $this->prenom .' '. $this->nom. ' a joué dans : ';
+    public function getFilmographie()
+    {
+        $str = "L'acteur " . $this->prenom . " " . $this->nom . " a joué dans:";
         $str .= '<ul>';
-        foreach($this->castings as $casting){
-            $str .= '<li>'. $casting[1]->getTitre(). ' - '.$casting[0]->getPersonnage().'</li>';    
+        foreach ($this->castings as $casting) {
+            // index 0 = role et index 1 = film
+            $str .= '<li>' . $casting[1]->getTitre() . ' - rôle: ' . $casting[0]->getPersonnage() . '</li>';
         }
-        $str .=  '</ul>';
+        $str .= '</ul>';
         return $str;
     }
 
 
-    public function getNom(){
+    //GETTER
+
+    public function getNom()
+    {
         return $this->prenom . ' ' . $this->nom;
     }
 }
