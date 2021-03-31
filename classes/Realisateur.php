@@ -1,25 +1,28 @@
 <?php
 
-class Realisateur extends Individu{
-
+class Realisateur extends Individu
+{
     private $films = [];
+    // Aucune propriété supplémentaire à gérer -> le constructeur parent va suffire
 
     public function __toString()
     {
-        return 'Réalisateur : '. parent::__toString();
+        return 'Réalisateur: ' . parent::__toString();
     }
 
-    public function ajouterFilm(Film $film){
-        array_push($this->film, [$film]);
+    public function ajouterFilm(Film $film)
+    {
+        array_push($this->films, $film);
     }
 
-    public function getRealisations(){
-        $str = "Le réalisateur ". $this->prenom .' '. $this->nom. ' a réalisé les films suivants : ';
+    public function getRealisations()
+    {
+        $str = "Le réalisateur " . $this->prenom . " " . $this->nom . " a réalisé les films suivants: ";
         $str .= '<ul>';
-        foreach($this->films as $film){
-            $str .= '<li>'. $film[1]->getTitre().'</li>';    
+        foreach ($this->films as $film) {
+            $str .= '<li>' . $film->getTitre() . '</li>';
         }
-        $str .=  '</ul>';
+        $str .= '</ul>';
         return $str;
     }
 }
