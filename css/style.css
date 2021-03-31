@@ -1,0 +1,20 @@
+*{
+    box-sizing: content-box;
+}
+header{
+    margin-bottom: 100px;
+}
+td{
+    border: solid 1px black;
+    padding: 1px 10px;
+}
+td img{
+    width: 100%;
+    overflow: hidden;
+}
+table{
+    text-align: center;
+}
+.affiche{
+    width: 200px;
+}
