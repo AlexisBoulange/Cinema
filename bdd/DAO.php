@@ -7,7 +7,7 @@ class DAO{
 
     public function __construct(){
         $this->bdd = new PDO(
-            'mysql:host=localhost:3306;dbname=cinema',
+            'mysql:host=localhost:3306;dbname=cinema;charset=utf8mb4;',
             'root',
             ''
         );
