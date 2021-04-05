@@ -36,7 +36,7 @@ class GenreController{
 
     }
 
-
+    //Ajouter un genre
 
     public function addGenreForm(){
         require "views/genre/ajouterGenreForm.php";
@@ -57,4 +57,21 @@ class GenreController{
 
         require "views/genre/ajouterGenre.php";
     }
+
+    //Supprimer un genre
+
+    public function deleteGenre($id){
+
+        $dao = new DAO();
+
+        $sql = "DELETE FROM genre
+                WHERE genre_id = :id";
+
+        $supprimer = $dao->executerRequete($sql, [':id' => $id]);
+
+        require "views/genre/deleteGenre.php";
+    }
+
+
+
 }
