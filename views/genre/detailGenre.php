@@ -16,7 +16,7 @@ $detailGenre = $filmGenre->fetch(PDO::FETCH_ASSOC);
         <?php
                 echo"<ul>";
                 while($filmo = $filmGenre->fetch()){
-                    echo "<li><a href='index.php?action=detailFilm&id= ". $filmo["film_id"]."'</a>".$filmo["titre"]."</br>";
+                        echo "<li><a href='index.php?action=detailFilm&id= ". $filmo["film_id"]."'</a>".$filmo["titre"]."</br>";
                 }
                 "</li></ul>";
         ?>
