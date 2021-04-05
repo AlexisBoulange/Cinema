@@ -15,6 +15,7 @@ $detailReal = $realisateur->fetch(PDO::FETCH_ASSOC);
         <tr>
             <th>SEXE</th>
             <th>DATE DE NAISSANCE</th>
+            <th>FILMOGRAPHIE</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +29,6 @@ $detailReal = $realisateur->fetch(PDO::FETCH_ASSOC);
         ?>
     </tbody>
 </table>
-
 
 
 
