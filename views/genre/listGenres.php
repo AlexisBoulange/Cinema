@@ -18,6 +18,7 @@ ob_start();
         <?php
             while($genre = $genres->fetch()){
                 echo "<tr><td><a href='index.php?action=detailGenre&id=".$genre["genre_id"]."'>" .$genre["libelle"]."</td>";
+                echo "<td><a href='index.php?action=deleteGenre&id=".$genre["genre_id"]."'>Supprimer</a></td></tr>";
             }
         ?>
     </tbody>
