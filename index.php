@@ -39,6 +39,12 @@ if (isset($_GET['action'])){
         case "detailFilm":
             $ctrlFilm->findDetailFilm($id);
             break;
+        case "ajouterFilmForm":
+            $ctrlFilm->addFilmForm($id);
+            break;
+        case "ajouterFilm":
+            $ctrlFilm->addFilm($id);
+            break;
         case "ajouterRealForm" : 
             $ctrlReal->addRealForm();
             break;
@@ -62,6 +68,15 @@ if (isset($_GET['action'])){
             break;
         case "ajouterGenre" : 
             $ctrlGenre->addGenre($_POST); 
+            break;
+        case "editReal" :
+            $ctrlReal->editRealForm($id);
+            break;
+        case "editRealOK" :
+            $ctrlReal->editReal($id, $_POST);
+            break;
+        case "deleteGenre" :
+            $ctrlGenre->deleteGenre($id);
             break;
     }
 }else {
