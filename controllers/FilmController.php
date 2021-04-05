@@ -75,4 +75,35 @@ require "views/film/detailFilm.php";
     
 
 
+    // Ajouter un film
+
+    public function addFilmForm(){
+        
+        $dao = new DAO();
+
+        $sql = "SELECT realisateur_id, CONCAT(prenom, ' ', nom) AS realisateur, sexe, date_naissance
+                FROM realisateur r
+                ORDER BY realisateur ASC";
+
+        $reals = $dao->executerRequete($sql);           
+        require "views/film/ajouterFilmForm.php";    
+    }
+
+
+    public function addFilm($array){
+
+        $dao = new DAO();
+
+        $sql = "INSERT INTO film(titre, sortie, duree, realisateur_id)
+        VALUES (:titre, :sortie, :duree, :realisateur_id)";
+
+        $titre = filter_var($array['titre'], FILTER_SANITIZE_STRING);
+        $sortie = filter_var($array['sortie'], FILTER_SANITIZE_STRING);
+        $duree = filter_var($array['duree'], FILTER_SANITIZE_STRING);
+        $realisateur = filter_var($array['realisateur_id'], FILTER_SANITIZE_STRING);
+
+        $ajout = $dao->executerRequete($sql, [":titre" => $titre, ":sortie" => $sortie, ":duree" => $duree, ":realisateur_id"  => $realisateur]);
+
+        require "views/film/ajouterFilm.php";
+    }
 }
