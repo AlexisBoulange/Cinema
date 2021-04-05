@@ -24,15 +24,14 @@ ob_start();
                 echo "<td>". $film["date"]."</td>";
                 echo "<td>". $film["duree"]."</td>";
                 echo "<td>". $film['genres']."</td>";
-                
-                echo "<td><a href='index.php?action=detailRealisateur&id=". $film["realisateur_id"]."'>".$film['realisateur']."</td></tr>";
+                echo "<td><a href='index.php?action=detailReal&id=". $film["realisateur_id"]."'>".$film['realisateur']."</td></tr>";
             }
         ?>
     </tbody>
 </table>
 
 
-
+<a href="./index.php?action=ajouterFilmForm">Ajouter film</a>
 
 
 <?php
