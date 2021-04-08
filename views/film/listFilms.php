@@ -24,7 +24,9 @@ ob_start();
                 echo "<td>". $film["date"]."</td>";
                 echo "<td>". $film["duree"]."</td>";
                 echo "<td>". $film['genres']."</td>";
-                echo "<td><a href='index.php?action=detailReal&id=". $film["realisateur_id"]."'>".$film['realisateur']."</td></tr>";
+                echo "<td><a href='index.php?action=detailReal&id=". $film["realisateur_id"]."'>".$film['realisateur']."</td>";
+                echo "<td><a href='index.php?action=editFilmForm&id=".$film['film_id']."'>Modifier</a></td>";
+                echo "<td><a href='index.php?action=deleteFilm&id=".$film['film_id']."'>Supprimer</a></tr>";
             }
         ?>
     </tbody>
