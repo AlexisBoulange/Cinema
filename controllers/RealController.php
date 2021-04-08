@@ -9,7 +9,7 @@ class RealController{
 
         $dao = new DAO;
 
-        $sql = "SELECT realisateur_id, CONCAT(prenom, ' ', nom) AS realisateur
+        $sql = "SELECT realisateur_id, CONCAT(prenom, ' ', nom) AS realisateur,sexe
                 FROM realisateur r
                 ORDER BY realisateur ASC";
         $reals = $dao->executerRequete($sql);
@@ -89,6 +89,20 @@ class RealController{
         $modifier = $dao->executerRequete($sql, [":id" => $id, ":nom" => $nom_realisateur, ":prenom" => $prenom_realisateur]);
 
         header("Location: index.php?action=listReal");
+    }
+
+    //Supprimer un genre
+
+    public function deleteReal($id){
+
+        $dao = new DAO();
+
+        $sql = "DELETE FROM realisateur
+                WHERE realisateur_id = :id";
+
+        $supprimer = $dao->executerRequete($sql, [':id' => $id]);
+
+        require "views/realisateur/deleteReal.php";
     }
 
 }
