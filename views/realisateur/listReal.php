@@ -13,16 +13,16 @@ ob_start();
         <tr>
             <th>REALISATEUR</th>
             <th>SEXE</th>
-            <th>MODIFIER</th>
+            
         </tr>
     </thead>
     <tbody>
         <?php
             while($real = $reals->fetch()){
                 echo "<tr><td><a href='index.php?action=detailReal&id=".$real["realisateur_id"]."'>" .$real["realisateur"]."</td>";
-                echo "<td>". $real["sexe"]."</td>";
-                echo "<td><a href='index.php?action=editReal&id=".$real["realisateur_id"]."'>Modifier</td></tr>";
-                
+                echo "<td>". $real['sexe']."</td>";
+                echo "<td><a href='index.php?action=editReal&id=".$real["realisateur_id"]."'>Modifier</a></td>";
+                echo "<td><a href='index.php?action=deleteReal&id=".$real["realisateur_id"]."'>Supprimer</a></td></tr>";
             }
         ?>
     </tbody>
