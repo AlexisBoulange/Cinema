@@ -19,12 +19,12 @@ class ActeurController
         require "views/acteur/listActeurs.php";
     }
 
-    public function findDetailActor($id)
+    public function findDetailActor($id, $edit = false)
     {
 
         $dao = new DAO;
 
-        $sql = "SELECT a.acteur_id, CONCAT(a.prenom, ' ', a.nom) AS acteur, a.sexe, a.date_naissance
+        $sql = "SELECT a.acteur_id, CONCAT(a.prenom, ' ', a.nom) AS acteur, a.sexe, a.date_naissance, prenom, nom
                 FROM acteur a
                 WHERE a.acteur_id = :id";
         $acteur = $dao->executerRequete($sql, [":id" => $id]);
@@ -39,7 +39,12 @@ class ActeurController
         
         $filmoActeur = $dao->executerRequete($sql2, [":id" => $id]);
 
-        require "views/acteur/detailActeur.php";
+
+        if(!$edit){
+            require "views/acteur/detailActeur.php";
+        }else {
+            return $acteur;
+        }
     }
 
     public function addActorForm(){
@@ -54,13 +59,52 @@ class ActeurController
         $sql = "INSERT INTO acteur(nom, prenom, sexe, date_naissance)
         VALUES (:nom, :prenom, :sexe, :date_naissance)";
 
-        $nom_acteur = filter_var($array['nom_du_acteur'], FILTER_SANITIZE_STRING);
-        $prenom_acteur = filter_var($array['prenom_du_acteur'], FILTER_SANITIZE_STRING);
+        $nom_acteur = filter_var($array['nom_acteur'], FILTER_SANITIZE_STRING);
+        $prenom_acteur = filter_var($array['prenom_acteur'], FILTER_SANITIZE_STRING);
         $sexe = filter_var($array['sexe'], FILTER_SANITIZE_STRING);
         $date_naissance = filter_var($array['date_de_naissance'], FILTER_SANITIZE_STRING);
 
         $ajout = $dao->executerRequete($sql, [":nom" => $nom_acteur, ":prenom" => $prenom_acteur, ":sexe" => $sexe, ":date_naissance"  => $date_naissance]);
 
         require "views/acteur/ajouterActeur.php";
+    }
+
+    //Modifier un acteur
+
+    public function editActeurForm($id){
+        $acteur =  $this->findDetailActor($id, true);
+        require "views/acteur/editActeur.php";
+    }
+
+    public function editActeur($id, $array){
+
+        $dao = new DAO();
+
+        $nom_acteur = filter_var($array['nom_acteur'], FILTER_SANITIZE_STRING);
+        $prenom_acteur = filter_var($array['prenom_acteur'], FILTER_SANITIZE_STRING);
+
+        $sql = "UPDATE acteur
+                SET nom = :nom,
+                prenom = :prenom
+                WHERE acteur_id = :id";
+
+        
+        $modifier = $dao->executerRequete($sql, [":id" => $id, ":nom" => $nom_acteur, ":prenom" => $prenom_acteur]);
+
+        header("Location: index.php?action=listActeurs");
+    }
+
+    //Supprimer Acteur
+
+    public function deleteActeur($id){
+
+        $dao = new DAO();
+
+        $sql = "DELETE FROM acteur
+                WHERE acteur_id = :id";
+
+        $supprimer = $dao->executerRequete($sql, [':id' => $id]);
+
+        require "views/acteur/deleteActeur.php";
     }
 }
