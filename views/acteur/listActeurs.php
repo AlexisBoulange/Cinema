@@ -19,10 +19,11 @@ ob_start();
     <tbody>
         <?php
             while($acteur = $acteurs->fetch()){
-                echo "<tr><td><a href='index.php?action=detailActeur&id=".$acteur["acteur_id"]."'>" .$acteur["acteur"]."</td>";
+                echo "<tr><td><a href='index.php?action=detailActeur&id=".$acteur["acteur_id"]."'>" .$acteur["acteur"]."</a></td>";
                 echo "<td>". $acteur["sexe"]."</td>";
                 echo "<td>". $acteur["date_naissance"]."</td>";
-                
+                echo "<td><a href='index.php?action=editActeur&id=".$acteur["acteur_id"]."'>Modifier</a></td>";
+                echo "<td><a href='index.php?action=deleteActeur&id=".$acteur["acteur_id"]."'>Supprimer</a></td></tr>";
             }
         ?>
     </tbody>
