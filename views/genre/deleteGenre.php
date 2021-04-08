@@ -2,7 +2,6 @@
 
 ob_start();
 
-$deleted = $supprimer->fetch();
 
 ?>
 
