@@ -58,6 +58,12 @@ $detailRea = $rea->fetch(PDO::FETCH_ASSOC);
 </table>
 
 <?php
+
+echo "<a href='index.php?action=ajouterCasting&id=". $detailFilm['film_id']. "'> Ajouter un acteur au casting </a><br/>";
+
+
+?>
+<?php
 $acteurs->closeCursor();
 $titre = "Détails du film " . $detailFilm["titre"];
 $contenu = ob_get_clean();
