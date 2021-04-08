@@ -26,17 +26,27 @@ ob_start();
             <input type="text" id="duree" name="duree" placeholder="Ex : 120" required>
         </div>
         <div>
-            <div>
-                <label for="realisateur">Réalisateur :</label>
-                <select name="realisateur_id" id="realisateur_id">
-                
-                <?php 
-                while($real = $reals->fetch()){
-                    echo "<option value='".$real['realisateur']."'>".$real['realisateur']."</option>";
-                } 
+            <label for="realisateur">Réalisateur :</label>
+            <select name="realisateur_id" id="realisateur_id">
+
+                <?php
+                while ($real = $reals->fetch()) {
+                    echo "<option value='" . $real['realisateur_id'] . "'>" . $real['realisateur'] . "</option>";
+                }
                 ?>
-                </select>
-            </div>
+            </select>
+        </div>
+        <div>
+            <label for="genre">Genre :</label>
+            <select name="genre_id[]" multiple>
+                <?php
+                while ($genre = $genres->fetch()) {
+                    echo "<option value=" . $genre['genre_id'] . ">" . $genre['libelle'] . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div>
             <button type="submit">Ajouter le film</button>
         </div>
     </form>
