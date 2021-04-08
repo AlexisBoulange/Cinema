@@ -3,6 +3,7 @@
 ob_start();
 
 $modifReal = $realisateur->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 <h2>Modifier un realisateur</h2>
