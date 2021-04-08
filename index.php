@@ -40,10 +40,10 @@ if (isset($_GET['action'])){
             $ctrlFilm->findDetailFilm($id);
             break;
         case "ajouterFilmForm":
-            $ctrlFilm->addFilmForm($id);
+            $ctrlFilm->addFilmForm();
             break;
         case "ajouterFilm":
-            $ctrlFilm->addFilm($id);
+            $ctrlFilm->addFilm($_POST);
             break;
         case "ajouterRealForm" : 
             $ctrlReal->addRealForm();
@@ -56,6 +56,12 @@ if (isset($_GET['action'])){
             break;
         case "ajouterActeur" : 
             $ctrlActeur->addActor($_POST); 
+            break;
+        case "editActeur" :
+            $ctrlActeur->editActeurForm($id);
+            break;
+        case "editActeurOK" :
+            $ctrlActeur->editActeur($id, $_POST);
             break;
         case "listGenres" : 
             $ctrlGenre->findGenres(); 
@@ -77,6 +83,21 @@ if (isset($_GET['action'])){
             break;
         case "deleteGenre" :
             $ctrlGenre->deleteGenre($id);
+            break;
+        case "deleteReal" :
+            $ctrlReal->deleteReal($id);
+            break;
+        case "deleteActeur" :
+            $ctrlActeur->deleteActeur($id);
+            break;
+        case "deleteFilm" :
+            $ctrlFilm->deleteFilm($id);
+            break;
+        case "editFilmForm" :
+            $ctrlFilm->editFilmForm($id);
+            break;
+        case "editFilm" :
+            $ctrlFilm->editFilm($id, $_POST);
             break;
     }
 }else {
